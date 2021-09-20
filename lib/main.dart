@@ -1,12 +1,6 @@
-//import 'dart:html';
-
-//import 'dart:ffi';
-//import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 void main() {
-  //print('hello');
   runApp(MyApp());
 }
 
