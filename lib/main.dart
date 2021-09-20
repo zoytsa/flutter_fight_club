@@ -31,13 +31,13 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color.fromRGBO(213, 222, 240, 1),
         body: Column(children: [
           SizedBox(height: 36),
-          rowWithData(text1: 'You', text2: 'Enemy'),
+          RowWithData(text1: 'You', text2: 'Enemy'),
           SizedBox(height: 7),
-          rowWithData(text1: '1', text2: '1'),
-          rowWithData(text1: '1', text2: '1'),
-          rowWithData(text1: '1', text2: '1'),
-          rowWithData(text1: '1', text2: '1'),
-          rowWithData(text1: '1', text2: '1'),
+          RowWithData(text1: '1', text2: '1'),
+          RowWithData(text1: '1', text2: '1'),
+          RowWithData(text1: '1', text2: '1'),
+          RowWithData(text1: '1', text2: '1'),
+          RowWithData(text1: '1', text2: '1'),
           Expanded(child: SizedBox()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               SizedBox(width: 16),
               Expanded(
-                child: goButton(
+                child: GoButton(
                   readyToStart:
                       defendingBodyPart != null && attackingBodyPart != null,
                   resetSelection: _resetSelection,
@@ -145,11 +145,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class rowWithData extends StatelessWidget {
+class RowWithData extends StatelessWidget {
   final String text1;
   final String text2;
 
-  const rowWithData({Key? key, required this.text1, required this.text2})
+  const RowWithData({Key? key, required this.text1, required this.text2})
       : super(key: key);
 
   @override
@@ -168,11 +168,11 @@ class rowWithData extends StatelessWidget {
   }
 }
 
-class goButton extends StatelessWidget {
+class GoButton extends StatelessWidget {
   final bool readyToStart;
 
   final VoidCallback resetSelection;
-  goButton({Key? key, required this.readyToStart, required this.resetSelection})
+  GoButton({Key? key, required this.readyToStart, required this.resetSelection})
       : super(key: key);
 
   @override
