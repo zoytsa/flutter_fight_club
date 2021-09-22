@@ -61,9 +61,22 @@ class MyHomePageState extends State<MyHomePage> {
               enemysLivesCount: enemysLives,
               yourLivesCount: yourLives,
             ),
-            Expanded(child: SizedBox()),
-            ResultWidget(text: resultText),
-            Expanded(child: SizedBox()),
+            //Expanded(child: SizedBox()),
+            //ResultWidget(text: resultText),
+            Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30, bottom: 30.0, left: 16, right: 16),
+                    child: SizedBox(
+                        width: double.infinity,
+                        child: ColoredBox(
+                          color: FightClubColors.blueBackground,
+                          child: Center(
+                            child: Text(resultText,
+                                style: TextStyle(
+                                    color: FightClubColors.darkGreyText)),
+                          ),
+                        )))),
             ControlsWidget(
               selectAttackingBodyPart: _selectAttackingBodyPart,
               attackingBodyPart: attackingBodyPart,
@@ -204,25 +217,75 @@ class FightersInfo extends StatelessWidget {
       SizedBox(
         height: 160,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.stretch, //!!!3
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // RowWithData(text1: 'You', text2: 'Enemy'),
 
-            PlayerInfo(
-              currentLivesCount: yourLivesCount,
-              maxLivesCount: maxLivesCount,
-              title: 'You',
-              backgroundColor: FightClubColors.whiteBackground,
-              imageAvatarPath: FightClubImages.youAvatar,
+            Expanded(
+              child: ColoredBox(
+                color: FightClubColors.whiteBackground,
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      LivesWidget(
+                          currentLivesCount: yourLivesCount,
+                          overallLivesCount: maxLivesCount),
+                      Column(children: [
+                        const SizedBox(height: 16),
+                        Text('You',
+                            style:
+                                TextStyle(color: FightClubColors.darkGreyText)),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                            height: 92,
+                            width: 92,
+                            child: Image.asset(FightClubImages.youAvatar,
+                                width: 92, height: 92))
+                      ]),
+                    ]),
+              ),
             ),
-            PlayerInfo(
-              currentLivesCount: enemysLivesCount,
-              maxLivesCount: maxLivesCount,
-              title: 'Enemy',
-              backgroundColor: FightClubColors.blueBackground,
-              imageAvatarPath: FightClubImages.enemyAvatar,
-            )
+
+            Expanded(
+              child: ColoredBox(
+                color: FightClubColors.blueBackground,
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Column(children: [
+                        const SizedBox(height: 16),
+                        Text('Enemy',
+                            style:
+                                TextStyle(color: FightClubColors.darkGreyText)),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                            height: 92,
+                            width: 92,
+                            child: Image.asset(FightClubImages.enemyAvatar,
+                                width: 92, height: 92))
+                      ]),
+                      LivesWidget(
+                          currentLivesCount: enemysLivesCount,
+                          overallLivesCount: maxLivesCount),
+                    ]),
+              ),
+            ),
+
+            // PlayerInfo(
+            //   currentLivesCount: yourLivesCount,
+            //   maxLivesCount: maxLivesCount,
+            //   title: 'You',
+            //   backgroundColor: FightClubColors.whiteBackground,
+            //   imageAvatarPath: FightClubImages.youAvatar,
+            // ),
+            // PlayerInfo(
+            //   currentLivesCount: enemysLivesCount,
+            //   maxLivesCount: maxLivesCount,
+            //   title: 'Enemy',
+            //   backgroundColor: FightClubColors.blueBackground,
+            //   imageAvatarPath: FightClubImages.enemyAvatar,
+            // )
           ],
         ),
       ),
@@ -252,9 +315,8 @@ class PlayerInfo extends StatelessWidget {
     return Expanded(
       child: ColoredBox(
         color: backgroundColor,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //   crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               title == 'You'
                   ? LivesWidget(
@@ -303,7 +365,18 @@ class ResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: TextStyle(color: FightClubColors.darkGreyText));
+    return Expanded(
+        child: Padding(
+            padding: const EdgeInsets.only(
+                top: 30, bottom: 30.0, left: 20.0, right: 20),
+            child: SizedBox(
+                child: ColoredBox(
+              color: FightClubColors.blueBackground,
+              child: Center(
+                child: Text(text,
+                    style: TextStyle(color: FightClubColors.darkGreyText)),
+              ),
+            ))));
   }
 }
 
@@ -325,7 +398,7 @@ class ControlsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(width: 16),
         Expanded(

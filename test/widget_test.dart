@@ -125,27 +125,27 @@ void main() {
         'Centered box is expanded, has proper color and has proper size',
         (WidgetTester tester) async {
       void _testSizedBox(SizedBox sizedBox) {
-        expect(sizedBox.width, double.infinity);
+        expect(sizedBox.width, double.infinity, reason: "no white1");
       }
 
       void _testPadding(Padding padding) {
-        expect((padding.padding as EdgeInsets).left, 16);
-        expect((padding.padding as EdgeInsets).right, 16);
+        expect((padding.padding as EdgeInsets).left, 16, reason: "no white2");
+        expect((padding.padding as EdgeInsets).right, 16, reason: "no white3");
       }
 
       void _testColoredBox(ColoredBox coloredBox) {
-        expect(coloredBox.color, const Color(0xFFC5D1EA));
+        expect(coloredBox.color, const Color(0xFFC5D1EA), reason: "no white4");
       }
 
       await tester.pumpWidget(MyApp());
       final SafeArea safeArea = tester.widget<SafeArea>(find.byType(SafeArea));
-      expect(safeArea.child, isInstanceOf<Column>());
+      expect(safeArea.child, isInstanceOf<Column>(), reason: "no white5");
 
       final Column topLevelColumn = safeArea.child as Column;
       final Widget? possiblyExpanded = topLevelColumn.children
           .firstWhereOrNull((element) => element is Expanded);
-      expect(possiblyExpanded, isNotNull);
-      expect(possiblyExpanded, isInstanceOf<Expanded>());
+      expect(possiblyExpanded, isNotNull, reason: "no white6");
+      expect(possiblyExpanded, isInstanceOf<Expanded>(), reason: "no white7");
       final Expanded expanded = possiblyExpanded as Expanded;
 
       if (expanded.child is SizedBox) {
@@ -153,14 +153,14 @@ void main() {
 
         _testSizedBox(sizedBox);
 
-        expect(sizedBox.child, isInstanceOf<Padding>());
+        expect(sizedBox.child, isInstanceOf<Padding>(), reason: "no white8");
         final Padding padding = sizedBox.child as Padding;
         _testPadding(padding);
 
-        expect(padding.child, isInstanceOf<ColoredBox>());
+        expect(padding.child, isInstanceOf<ColoredBox>(), reason: "no white9");
         _testColoredBox(padding.child as ColoredBox);
       } else {
-        expect(expanded.child, isInstanceOf<Padding>());
+        expect(expanded.child, isInstanceOf<Padding>(), reason: "no white10");
         final Padding padding = expanded.child as Padding;
         _testPadding(padding);
 
@@ -168,14 +168,17 @@ void main() {
           final SizedBox sizedBox = padding.child as SizedBox;
           _testSizedBox(sizedBox);
 
-          expect(sizedBox.child, isInstanceOf<ColoredBox>());
+          expect(sizedBox.child, isInstanceOf<ColoredBox>(),
+              reason: "no white11");
           _testColoredBox(sizedBox.child as ColoredBox);
         } else {
-          expect(padding.child, isInstanceOf<ColoredBox>());
+          expect(padding.child, isInstanceOf<ColoredBox>(),
+              reason: "no white12");
           final ColoredBox coloredBox = padding.child as ColoredBox;
           _testColoredBox(coloredBox);
 
-          expect(coloredBox.child, isInstanceOf<SizedBox>());
+          expect(coloredBox.child, isInstanceOf<SizedBox>(),
+              reason: "no white13");
 
           _testSizedBox(coloredBox.child as SizedBox);
         }
