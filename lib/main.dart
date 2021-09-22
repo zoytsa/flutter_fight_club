@@ -204,6 +204,7 @@ class FightersInfo extends StatelessWidget {
       SizedBox(
         height: 160,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // RowWithData(text1: 'You', text2: 'Enemy'),
@@ -249,48 +250,46 @@ class PlayerInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SizedBox(
-          height: 160,
-          //      width: 180,
-          child: ColoredBox(
-            color: backgroundColor,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  title == 'You'
-                      ? LivesWidget(
-                          currentLivesCount: currentLivesCount,
-                          overallLivesCount: maxLivesCount)
-                      : Column(children: [
-                          const SizedBox(height: 16),
-                          Text(title,
-                              style: TextStyle(
-                                  color: FightClubColors.darkGreyText)),
-                          const SizedBox(height: 12),
-                          SizedBox(
-                              height: 92,
-                              width: 92,
-                              child: Image.asset(imageAvatarPath,
-                                  width: 92, height: 92))
-                        ]),
-                  title == 'You'
-                      ? Column(children: [
-                          const SizedBox(height: 16),
-                          Text(title,
-                              style: TextStyle(
-                                  color: FightClubColors.darkGreyText)),
-                          const SizedBox(height: 12),
-                          SizedBox(
-                              height: 92,
-                              width: 92,
-                              child: Image.asset(imageAvatarPath,
-                                  width: 92, height: 92))
-                        ])
-                      : LivesWidget(
-                          currentLivesCount: currentLivesCount,
-                          overallLivesCount: maxLivesCount),
-                ]),
-          )),
+      child: ColoredBox(
+        color: backgroundColor,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              title == 'You'
+                  ? LivesWidget(
+                      currentLivesCount: currentLivesCount,
+                      overallLivesCount: maxLivesCount)
+                  : Column(children: [
+                      const SizedBox(height: 16),
+                      Text(title,
+                          style:
+                              TextStyle(color: FightClubColors.darkGreyText)),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                          height: 92,
+                          width: 92,
+                          child: Image.asset(imageAvatarPath,
+                              width: 92, height: 92))
+                    ]),
+              title == 'You'
+                  ? Column(children: [
+                      const SizedBox(height: 16),
+                      Text(title,
+                          style:
+                              TextStyle(color: FightClubColors.darkGreyText)),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                          height: 92,
+                          width: 92,
+                          child: Image.asset(imageAvatarPath,
+                              width: 92, height: 92))
+                    ])
+                  : LivesWidget(
+                      currentLivesCount: currentLivesCount,
+                      overallLivesCount: maxLivesCount),
+            ]),
+      ),
     );
   }
 }
@@ -326,7 +325,7 @@ class ControlsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      //   crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         SizedBox(width: 16),
         Expanded(

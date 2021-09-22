@@ -1,4 +1,4 @@
-import 'dart:convert';
+//import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
@@ -91,21 +91,18 @@ void main() {
           rowWidgets.firstWhereOrNull((e) => e.children.length == 2);
       expect(rowWithTwoChildren, isNotNull,
           reason: "Cannot find Row with needed colors");
+      expect(rowWithTwoChildren!.crossAxisAlignment, CrossAxisAlignment.stretch,
+          reason: "no stretch");
+      expect(rowWithTwoChildren.children[0], isInstanceOf<Expanded>(),
+          reason: "no Expanded");
+      expect((rowWithTwoChildren.children[0] as Expanded).child,
+          isInstanceOf<ColoredBox>(),
+          reason: "no ColoredBox");
       expect(
-          rowWithTwoChildren!.crossAxisAlignment, CrossAxisAlignment.stretch);
-      expect(
-        rowWithTwoChildren.children[0],
-        isInstanceOf<Expanded>(),
-      );
-      expect(
-        (rowWithTwoChildren.children[0] as Expanded).child,
-        isInstanceOf<ColoredBox>(),
-      );
-      expect(
-        ((rowWithTwoChildren.children[0] as Expanded).child as ColoredBox)
-            .color,
-        Colors.white,
-      );
+          ((rowWithTwoChildren.children[0] as Expanded).child as ColoredBox)
+              .color,
+          Colors.white,
+          reason: "no white");
 
       expect(
         rowWithTwoChildren.children[1],
