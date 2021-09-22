@@ -143,6 +143,8 @@ class MyHomePageState extends State<MyHomePage> {
           attackingBodyPart = null;
           enemyLosesLife = false;
           youLoseLife = false;
+          whatEnemyDefends = BodyPart.random();
+          whatEnemyAttacks = BodyPart.random();
         });
       }
     }
@@ -198,59 +200,97 @@ class FightersInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 160,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        // RowWithData(text1: 'You', text2: 'Enemy'),
+    return Stack(alignment: AlignmentDirectional.center, children: [
+      SizedBox(
+        height: 160,
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            // RowWithData(text1: 'You', text2: 'Enemy'),
 
-        SizedBox(
-          height: 160,
-          width: 180,
-          child: ColoredBox(
-            color: FightClubColors.whiteBackground,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                LivesWidget(
-                    currentLivesCount: yourLivesCount,
-                    overallLivesCount: maxLivesCount),
-                Column(children: [
-                  const SizedBox(height: 16),
-                  Text('You',
-                      style: TextStyle(color: FightClubColors.darkGreyText)),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                      height: 92,
-                      width: 92,
-                      child:
-                          // ColoredBox(color: Colors.red)
-                          Image.asset(FightClubImages.youAvatar,
-                              width: 92, height: 92))
-                ]),
-              ],
+            PlayerInfo(
+              currentLivesCount: yourLivesCount,
+              maxLivesCount: maxLivesCount,
+              title: 'You',
+              backgroundColor: FightClubColors.whiteBackground,
+              imageAvatarPath: FightClubImages.youAvatar,
             ),
-          ),
+            PlayerInfo(
+              currentLivesCount: enemysLivesCount,
+              maxLivesCount: maxLivesCount,
+              title: 'Enemy',
+              backgroundColor: FightClubColors.blueBackground,
+              imageAvatarPath: FightClubImages.enemyAvatar,
+            )
+          ],
         ),
+      ),
+      SizedBox(height: 44, width: 44, child: ColoredBox(color: Colors.green)),
+    ]);
+  }
+}
 
-        SizedBox(height: 44, width: 44, child: ColoredBox(color: Colors.green)),
+class PlayerInfo extends StatelessWidget {
+  const PlayerInfo({
+    Key? key,
+    required this.currentLivesCount,
+    required this.maxLivesCount,
+    required this.title,
+    required this.backgroundColor,
+    required this.imageAvatarPath,
+  }) : super(key: key);
 
-        Column(children: [
-          const SizedBox(height: 16),
-          Text('Enemy', style: TextStyle(color: FightClubColors.darkGreyText)),
-          const SizedBox(height: 12),
-          SizedBox(
-              height: 92,
-              width: 92,
-              child:
-                  //  ColoredBox(color: Colors.blue)
-                  Image.asset(FightClubImages.enemyAvatar,
-                      width: 92, height: 92))
-        ]),
+  final int currentLivesCount;
+  final int maxLivesCount;
+  final String title;
+  final Color backgroundColor;
+  final String imageAvatarPath;
 
-        LivesWidget(
-            currentLivesCount: enemysLivesCount,
-            overallLivesCount: maxLivesCount),
-      ]),
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: SizedBox(
+          height: 160,
+          //      width: 180,
+          child: ColoredBox(
+            color: backgroundColor,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  title == 'You'
+                      ? LivesWidget(
+                          currentLivesCount: currentLivesCount,
+                          overallLivesCount: maxLivesCount)
+                      : Column(children: [
+                          const SizedBox(height: 16),
+                          Text(title,
+                              style: TextStyle(
+                                  color: FightClubColors.darkGreyText)),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                              height: 92,
+                              width: 92,
+                              child: Image.asset(imageAvatarPath,
+                                  width: 92, height: 92))
+                        ]),
+                  title == 'You'
+                      ? Column(children: [
+                          const SizedBox(height: 16),
+                          Text(title,
+                              style: TextStyle(
+                                  color: FightClubColors.darkGreyText)),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                              height: 92,
+                              width: 92,
+                              child: Image.asset(imageAvatarPath,
+                                  width: 92, height: 92))
+                        ])
+                      : LivesWidget(
+                          currentLivesCount: currentLivesCount,
+                          overallLivesCount: maxLivesCount),
+                ]),
+          )),
     );
   }
 }
