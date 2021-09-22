@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'fight_club_colors.dart';
 import 'fight_club_icons.dart';
 import 'fight_club_images.dart';
 //import 'dart:ui';
@@ -52,7 +53,7 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(213, 222, 240, 1),
+        backgroundColor: FightClubColors.background,
         body: SafeArea(
           child: Column(children: [
             FightersInfo(
@@ -148,160 +149,6 @@ class MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class ResultWidget extends StatelessWidget {
-  final String text;
-  const ResultWidget({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(text);
-  }
-}
-
-class ControlsWidget extends StatelessWidget {
-  final BodyPart? defendingBodyPart;
-  final ValueSetter<BodyPart> selectDefendingBodyPart;
-  final BodyPart? attackingBodyPart;
-  final ValueSetter<BodyPart> selectAttackingBodyPart;
-
-  const ControlsWidget({
-    Key? key,
-    required this.defendingBodyPart,
-    required this.selectDefendingBodyPart,
-    required this.attackingBodyPart,
-    required this.selectAttackingBodyPart,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      //   crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        SizedBox(width: 16),
-        Expanded(
-          child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              //  SizedBox(height: 40),
-              Text('Defend'.toUpperCase()),
-              SizedBox(height: 13),
-              BodyPartButton(
-                  bodyPart: BodyPart.head,
-                  selected: defendingBodyPart == BodyPart.head,
-                  bodyPartSetter: selectDefendingBodyPart),
-              SizedBox(height: 14),
-              BodyPartButton(
-                  bodyPart: BodyPart.torso,
-                  selected: defendingBodyPart == BodyPart.torso,
-                  bodyPartSetter: selectDefendingBodyPart),
-              //    SizedBox(height: 14),
-              //   SizedBox(height: 40),
-              SizedBox(height: 14),
-              BodyPartButton(
-                  bodyPart: BodyPart.legs,
-                  selected: defendingBodyPart == BodyPart.legs,
-                  bodyPartSetter: selectDefendingBodyPart),
-              //    SizedBox(height: 14),
-              //   SizedBox(height: 40),
-            ],
-          ),
-        ),
-        SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            children: [
-              //      SizedBox(height: 40),
-              Text('Attack'.toUpperCase()),
-              SizedBox(height: 13),
-              BodyPartButton(
-                  bodyPart: BodyPart.head,
-                  selected: attackingBodyPart == BodyPart.head,
-                  bodyPartSetter: selectAttackingBodyPart),
-              SizedBox(height: 14),
-              BodyPartButton(
-                  bodyPart: BodyPart.torso,
-                  selected: attackingBodyPart == BodyPart.torso,
-                  bodyPartSetter: selectAttackingBodyPart),
-              //    SizedBox(height: 14),
-              //   SizedBox(height: 40),
-              SizedBox(height: 14),
-              BodyPartButton(
-                  bodyPart: BodyPart.legs,
-                  selected: attackingBodyPart == BodyPart.legs,
-                  bodyPartSetter: selectAttackingBodyPart),
-              //    SizedBox(height: 14),
-              //   SizedBox(height: 40),
-            ],
-          ),
-        ),
-        SizedBox(width: 16),
-      ],
-    );
-  }
-}
-
-class FightersInfo extends StatelessWidget {
-  final int maxLivesCount;
-  final int yourLivesCount;
-  final int enemysLivesCount;
-
-  const FightersInfo({
-    Key? key,
-    required this.maxLivesCount,
-    required this.yourLivesCount,
-    required this.enemysLivesCount,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 160,
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        // RowWithData(text1: 'You', text2: 'Enemy'),
-
-        LivesWidget(
-            currentLivesCount: yourLivesCount,
-            overallLivesCount: maxLivesCount),
-
-        Column(children: [
-          const SizedBox(height: 16),
-          Text('You'),
-          const SizedBox(height: 12),
-          SizedBox(
-              height: 92,
-              width: 92,
-              child:
-                  // ColoredBox(color: Colors.red)
-                  Image.asset(FightClubImages.youAvatar, width: 92, height: 92))
-        ]),
-
-        SizedBox(height: 44, width: 44, child: ColoredBox(color: Colors.green)),
-
-        Column(children: [
-          const SizedBox(height: 16),
-          Text('Enemy'),
-          const SizedBox(height: 12),
-          SizedBox(
-              height: 92,
-              width: 92,
-              child:
-                  //  ColoredBox(color: Colors.blue)
-                  Image.asset(FightClubImages.enemyAvatar,
-                      width: 92, height: 92))
-        ]),
-
-        LivesWidget(
-            currentLivesCount: enemysLivesCount,
-            overallLivesCount: maxLivesCount),
-      ]),
-    );
-  }
-}
-
 class LivesWidget extends StatelessWidget {
   final int overallLivesCount;
   final int currentLivesCount;
@@ -337,25 +184,171 @@ class LivesWidget extends StatelessWidget {
   }
 }
 
-class RowWithData extends StatelessWidget {
-  final String text1;
-  final String text2;
+class FightersInfo extends StatelessWidget {
+  final int maxLivesCount;
+  final int yourLivesCount;
+  final int enemysLivesCount;
 
-  const RowWithData({Key? key, required this.text1, required this.text2})
-      : super(key: key);
+  const FightersInfo({
+    Key? key,
+    required this.maxLivesCount,
+    required this.yourLivesCount,
+    required this.enemysLivesCount,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 4.0),
-      child: Row(//mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-        SizedBox(width: 16),
-        Expanded(child: Center(child: Text(text1))),
-        SizedBox(width: 12),
-        Expanded(child: Center(child: Text(text2))),
-        SizedBox(width: 16),
+    return SizedBox(
+      height: 160,
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        // RowWithData(text1: 'You', text2: 'Enemy'),
+
+        SizedBox(
+          height: 160,
+          width: 180,
+          child: ColoredBox(
+            color: FightClubColors.whiteBackground,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                LivesWidget(
+                    currentLivesCount: yourLivesCount,
+                    overallLivesCount: maxLivesCount),
+                Column(children: [
+                  const SizedBox(height: 16),
+                  Text('You',
+                      style: TextStyle(color: FightClubColors.darkGreyText)),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                      height: 92,
+                      width: 92,
+                      child:
+                          // ColoredBox(color: Colors.red)
+                          Image.asset(FightClubImages.youAvatar,
+                              width: 92, height: 92))
+                ]),
+              ],
+            ),
+          ),
+        ),
+
+        SizedBox(height: 44, width: 44, child: ColoredBox(color: Colors.green)),
+
+        Column(children: [
+          const SizedBox(height: 16),
+          Text('Enemy', style: TextStyle(color: FightClubColors.darkGreyText)),
+          const SizedBox(height: 12),
+          SizedBox(
+              height: 92,
+              width: 92,
+              child:
+                  //  ColoredBox(color: Colors.blue)
+                  Image.asset(FightClubImages.enemyAvatar,
+                      width: 92, height: 92))
+        ]),
+
+        LivesWidget(
+            currentLivesCount: enemysLivesCount,
+            overallLivesCount: maxLivesCount),
       ]),
+    );
+  }
+}
+
+class ResultWidget extends StatelessWidget {
+  final String text;
+  const ResultWidget({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text, style: TextStyle(color: FightClubColors.darkGreyText));
+  }
+}
+
+class ControlsWidget extends StatelessWidget {
+  final BodyPart? defendingBodyPart;
+  final ValueSetter<BodyPart> selectDefendingBodyPart;
+  final BodyPart? attackingBodyPart;
+  final ValueSetter<BodyPart> selectAttackingBodyPart;
+
+  const ControlsWidget({
+    Key? key,
+    required this.defendingBodyPart,
+    required this.selectDefendingBodyPart,
+    required this.attackingBodyPart,
+    required this.selectAttackingBodyPart,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      //   crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              //  SizedBox(height: 40),
+              Text('Defend'.toUpperCase(),
+                  style: TextStyle(color: FightClubColors.darkGreyText)),
+              SizedBox(height: 13),
+              BodyPartButton(
+                  bodyPart: BodyPart.head,
+                  selected: defendingBodyPart == BodyPart.head,
+                  bodyPartSetter: selectDefendingBodyPart),
+              SizedBox(height: 14),
+              BodyPartButton(
+                  bodyPart: BodyPart.torso,
+                  selected: defendingBodyPart == BodyPart.torso,
+                  bodyPartSetter: selectDefendingBodyPart),
+              //    SizedBox(height: 14),
+              //   SizedBox(height: 40),
+              SizedBox(height: 14),
+              BodyPartButton(
+                  bodyPart: BodyPart.legs,
+                  selected: defendingBodyPart == BodyPart.legs,
+                  bodyPartSetter: selectDefendingBodyPart),
+              //    SizedBox(height: 14),
+              //   SizedBox(height: 40),
+            ],
+          ),
+        ),
+        SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            children: [
+              //      SizedBox(height: 40),
+              Text('Attack'.toUpperCase(),
+                  style: TextStyle(color: FightClubColors.darkGreyText)),
+              SizedBox(height: 13),
+              BodyPartButton(
+                  bodyPart: BodyPart.head,
+                  selected: attackingBodyPart == BodyPart.head,
+                  bodyPartSetter: selectAttackingBodyPart),
+              SizedBox(height: 14),
+              BodyPartButton(
+                  bodyPart: BodyPart.torso,
+                  selected: attackingBodyPart == BodyPart.torso,
+                  bodyPartSetter: selectAttackingBodyPart),
+              //    SizedBox(height: 14),
+              //   SizedBox(height: 40),
+              SizedBox(height: 14),
+              BodyPartButton(
+                  bodyPart: BodyPart.legs,
+                  selected: attackingBodyPart == BodyPart.legs,
+                  bodyPartSetter: selectAttackingBodyPart),
+              //    SizedBox(height: 14),
+              //   SizedBox(height: 40),
+            ],
+          ),
+        ),
+        SizedBox(width: 16),
+      ],
     );
   }
 }
@@ -382,15 +375,15 @@ class GoButton extends StatelessWidget {
               // width: 40,
               child: ColoredBox(
                 color: readyToStart
-                    ? Color.fromRGBO(0, 0, 0, 0.87)
-                    : Color.fromRGBO(0, 0, 0, 0.38),
+                    ? FightClubColors.blackButton
+                    : FightClubColors.greyButton,
                 child: Center(
                   child: Text(
                     title.toUpperCase(),
                     style: TextStyle(
                         fontWeight: FontWeight.w900,
                         fontSize: 16,
-                        color: Colors.white),
+                        color: FightClubColors.whiteText),
                   ),
                 ),
               )),
@@ -439,9 +432,15 @@ class BodyPartButton extends StatelessWidget {
       child: SizedBox(
           height: 40,
           child: ColoredBox(
-            color: selected ? Color.fromRGBO(28, 121, 206, 1) : Colors.black38,
+            color: selected
+                ? FightClubColors.blueButton
+                : FightClubColors.greyButton,
             child: Center(
-              child: Text(bodyPart.name.toUpperCase()),
+              child: Text(bodyPart.name.toUpperCase(),
+                  style: TextStyle(
+                      color: selected
+                          ? FightClubColors.whiteText
+                          : FightClubColors.darkGreyText)),
             ),
           )),
     );
