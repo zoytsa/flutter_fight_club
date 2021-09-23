@@ -217,7 +217,7 @@ class FightersInfo extends StatelessWidget {
       SizedBox(
         height: 160,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch, //!!!3
+          crossAxisAlignment: CrossAxisAlignment.stretch, //!!!34
 
           children: [
             Expanded(
