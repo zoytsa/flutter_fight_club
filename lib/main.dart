@@ -218,15 +218,13 @@ class FightersInfo extends StatelessWidget {
         height: 160,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch, //!!!3
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // RowWithData(text1: 'You', text2: 'Enemy'),
 
+          children: [
             Expanded(
               child: ColoredBox(
                 color: FightClubColors.whiteBackground,
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       LivesWidget(
                           currentLivesCount: yourLivesCount,
