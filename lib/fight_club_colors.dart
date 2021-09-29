@@ -8,7 +8,7 @@ class FightClubColors {
 
   static const darkGreyText = Color.fromRGBO(22, 22, 22, 1);
   static const whiteText = Color.fromRGBO(255, 255, 255, 0.87);
-
+  static const whiteText1 = Color.fromRGBO(255, 255, 255, 1);
   static const whiteBackground = Color.fromRGBO(255, 255, 255, 1);
   static const blueBackground = Color.fromRGBO(197, 209, 234, 1);
 }
