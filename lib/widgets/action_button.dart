@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fight_club/fight_club_colors.dart';
+import 'package:flutter_fight_club/resources/fight_club_colors.dart';
 
-class GoButton extends StatelessWidget {
+class ActionButton extends StatelessWidget {
   final bool readyToStart;
   final String title;
   final VoidCallback onGoButtonClicked;
-  GoButton(
+  ActionButton(
       {Key? key,
       required this.readyToStart,
       required this.onGoButtonClicked,
