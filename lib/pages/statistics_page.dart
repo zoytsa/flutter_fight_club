@@ -9,25 +9,26 @@ class StatisticsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // var text = "Кнопка";
     return Scaffold(
+        backgroundColor: FightClubColors.background,
         body: SafeArea(
-      child: Column(children: [
-        //  SizedBox(height: 24),
-        Container(
-          margin: const EdgeInsets.only(left: 16, top: 24, right: 16),
-          child: Text('Statistics',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: FightClubColors.darkGreyText,
-                  fontWeight: FontWeight.normal)),
-        ),
-        Expanded(child: SizedBox(height: double.infinity)),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: SecondaryActionButton(
-              onTap: () => {Navigator.of(context).pop()}, text: 'Back'),
-        ),
-        //  SizedBox     SizedBox(height: 16)
-      ]),
-    ));
+          child: Column(children: [
+            //  SizedBox(height: 24),
+            Container(
+              margin: const EdgeInsets.only(left: 16, top: 24, right: 16),
+              child: Text('Statistics',
+                  style: TextStyle(
+                      fontSize: 24,
+                      color: FightClubColors.darkGreyText,
+                      fontWeight: FontWeight.normal)),
+            ),
+            Expanded(child: SizedBox(height: double.infinity)),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: SecondaryActionButton(
+                  onTap: () => {Navigator.of(context).pop()}, text: 'Back'),
+            ),
+            //  SizedBox     SizedBox(height: 16)
+          ]),
+        ));
   }
 }
